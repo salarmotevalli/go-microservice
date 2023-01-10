@@ -6,7 +6,7 @@ services:
     build: 
       context: ./../broker-service
       dockerfile: ./../broker-service/broker-service.dockerfile
-    restart: always
+    restart: "no"
     ports:
       - "8080:80"
     deploy:
@@ -17,7 +17,7 @@ services:
     build:
       context: ./../authentication-service
       dockerfile: ./../authentication-service/authentication-service.dockerfile
-    restart: always
+    restart: "no"
     ports:
       - "8081:80"
     deploy:
@@ -30,7 +30,7 @@ services:
     image: 'postgres:14.0'
     ports:
       - '5432:5432'
-    restart: always
+    restart: "no"
     deploy:
       mode: replicated
       replicas: 1
