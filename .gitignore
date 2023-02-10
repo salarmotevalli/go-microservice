@@ -1,3 +1,4 @@
 project/db-data
 broker-service/brokerApp
 authentication-service/authApp
+logger-service/loggerServiceApp

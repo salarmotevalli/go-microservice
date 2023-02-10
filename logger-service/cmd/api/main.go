@@ -24,7 +24,11 @@ type Config struct {
 	Models data.Models
 }
 
+var wait chan struct{}
+
 func main() {
+
+	wait = make(chan struct{}, 1)
 	// connect to mongo
 	mongoClient, err := connectToMongo()
 	if err != nil {
@@ -50,6 +54,8 @@ func main() {
 
 	// Start the server
 	go app.serve()
+
+	<-wait
 }
 
 func (app *Config) serve() {
@@ -62,6 +68,8 @@ func (app *Config) serve() {
 	if err != nil {
 		log.Panic(err)
 	}
+
+	wait <- struct{}{}
 }
 
 func connectToMongo() (*mongo.Client, error) {

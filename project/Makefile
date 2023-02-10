@@ -57,3 +57,8 @@ stop:
 	@echo "Stopping front end..."
 	@-pkill -SIGTERM -f "./${FRONT_END_BINARY}"
 	@echo "Stopped front end!"
+
+# execute inside docker container
+con:
+	@echo $(con)
+	docker-compose exec $(con) bash
