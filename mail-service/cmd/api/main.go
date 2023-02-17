@@ -27,6 +27,7 @@ func main() {
 		Addr:    fmt.Sprintf(":%s", webPort),
 		Handler: app.routes(),
 	}
+	log.Println("im main")
 
 	// start the server
 	err := srv.ListenAndServe()

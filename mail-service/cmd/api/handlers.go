@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 )
 
@@ -15,6 +16,7 @@ type LogPayload struct {
 }
 
 func (app *Config) SendMail(w http.ResponseWriter, r *http.Request) {
+	log.Println("im SendMail")
 	type mailMessage struct {
 		From    string `json:"from"`
 		To      string `json:"to"`
@@ -26,6 +28,7 @@ func (app *Config) SendMail(w http.ResponseWriter, r *http.Request) {
 
 	err := app.readJSON(w, r, &requestPayload)
 	if err != nil {
+		log.Println(err)
 		_ = app.errorJSON(w, err)
 		return
 	}
@@ -39,6 +42,7 @@ func (app *Config) SendMail(w http.ResponseWriter, r *http.Request) {
 
 	err = app.Mailer.sendSMTPMessage(msg)
 	if err != nil {
+		log.Println(err)
 		_ = app.errorJSON(w, err)
 		return
 	}
